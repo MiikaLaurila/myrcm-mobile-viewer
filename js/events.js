@@ -6,6 +6,12 @@ class Events {
 }
 
 const EventID = {
+
+    //MAIN PAGE
     "mainPageDownloaded": "mainPageDownloaded",
-    "showSelectedEventInfo": "showSelectedEventInfo"
+    "showSelectedEventInfo": "showSelectedEventInfo",
+
+    //LOADING CIRCLE
+    "showLoadingCircle": "showLoadingCircle",
+    "hideLoadingCircle": "hideLoadingCircle"
 }

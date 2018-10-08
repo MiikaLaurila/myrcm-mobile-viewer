@@ -1,5 +1,7 @@
 class MainPageParser {
     constructor() {
+        Events.DispatchEventWithID(EventID.showLoadingCircle);
+
         this.selectedPageID = "evt";
         this.selectedPageHeader = "Online Events"
 
@@ -23,6 +25,7 @@ class MainPageParser {
             const parser = new DOMParser();
             that.parsedPage = parser.parseFromString(x.responseText, "text/html");
             Events.DispatchEventWithID(EventID.mainPageDownloaded);
+            Events.DispatchEventWithID(EventID.hideLoadingCircle);
         };
 
         x.send();
@@ -48,6 +51,7 @@ class MainPageParser {
         dropDown.appendChild(archived);
 
         dropDown.addEventListener('change', () => {
+            Events.DispatchEventWithID(EventID.showLoadingCircle);
             this.selectedPageHeader = dropDown.options[dropDown.selectedIndex].text;
             this.selectedPageID = dropDown.options[dropDown.selectedIndex].value;
 
