@@ -14,8 +14,7 @@ class MainPageParser {
 
     DownloadSelectedMainPage() {
 
-        const url = "http://" + window.location.hostname + ":6969/" +
-           MYRCM_PREFIX + '?hId[1]=' + this.selectedPageID + '&pLa=en&tType=classic';
+        const url = CORS_PREFIX + MYRCM_PREFIX + '?hId[1]=' + this.selectedPageID + '&pLa=en&tType=classic';
 
         const that = this;
         const x = new XMLHttpRequest();
