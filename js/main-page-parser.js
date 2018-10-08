@@ -102,8 +102,6 @@ class MainPageParser {
             eventRow.onclick = function(){
                 MOBILE_VIEW.selectedEvent = eventList[i];
                 Events.DispatchEventWithID(EventID.showSelectedEventInfo);
-                console.log(MOBILE_VIEW.selectedEvent);
-                
             }
 
             eventTable.appendChild(eventRow);
@@ -122,32 +120,23 @@ class MainPageParser {
 
         for (let i = 1; i < dataRows.length; i++) {
 
-            const event = {
-                host: "",
-                name: "",
-                country: "",
-                from: "",
-                to: "",
-                onlineReports: "",
-                onlineStreaming: "",
-                hostPage: ""
-            };
+            const event = new RCEventData();
 
             event.host = dataRows[i].children[1].querySelector('a').innerHTML;
-            event.hostPage = dataRows[i].children[1].querySelector('a').href;
+            event.hostPage = dataRows[i].children[1].querySelector('a').getAttribute('href');
             event.country = dataRows[i].children[3].innerHTML;
             event.from = dataRows[i].children[4].innerHTML;
             event.to = dataRows[i].children[5].innerHTML;
 
             if (this.selectedPageID !== "evt") {
                 event.name = dataRows[i].children[2].querySelector('a').innerHTML;
-                event.onlineReports = dataRows[i].children[2].querySelector('a').href;
+                event.onlineReports = dataRows[i].children[2].querySelector('a').getAttribute('href');
             } else {
                 event.name = dataRows[i].children[2].innerHTML;
-                event.onlineReports = dataRows[i].children[6].querySelector('a').href;
+                event.onlineReports = dataRows[i].children[6].querySelector('a').getAttribute('href');
 
                 if (dataRows[i].children[7].querySelector('a')) {
-                    event.onlineStreaming = dataRows[i].children[7].querySelector('a').href;
+                    event.onlineStreaming = dataRows[i].children[7].querySelector('a').getAttribute('href');
                 } else {
                     event.onlineStreaming = "N/A";
                 }

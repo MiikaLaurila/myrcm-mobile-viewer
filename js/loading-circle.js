@@ -11,7 +11,13 @@ class LoadingCircle{
         document.body.appendChild(this.loadingImage);
     }
 
-    ShowLoadingCircle(){
+    ShowLoadingCircle(top){
+        if(top){
+            this.loadingImage.style.top = "calc(" + top + "% - 20px)";
+        }
+        else {
+            this.loadingImage.style.top = "calc(20% - 20px)";
+        }
         this.loadingImage.style.display = "block";
     }
 

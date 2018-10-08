@@ -10,4 +10,4 @@ cd ..
 cd style/
 
 rm styles.css
-cat reset.css index.css > styles.css 
+cat reset.css index.css > styles.css
