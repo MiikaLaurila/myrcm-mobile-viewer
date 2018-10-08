@@ -6,7 +6,7 @@ cd ..
 cd js/
 # We are at ./js/
 
-sed -i -e 's/192.168.11.52:6969/cors.myrcm-mobile.tk/g' myrcm-mobile-view.js
+sed -i -e 's/127.0.0.1:6969/cors.myrcm-mobile.tk/g' myrcm-mobile-view.js
 
 cd ..
 # We are at ./
@@ -24,7 +24,7 @@ sed -i -e "s/.js?v=$version\"/.js\"/g" index.html
 cd js/
 # We are at ./js/
 
-sed -i -e 's/cors.myrcm-mobile.tk/192.168.11.52:6969/g' myrcm-mobile-view.js
+sed -i -e 's/cors.myrcm-mobile.tk/127.0.0.1:6969/g' myrcm-mobile-view.js
 
 cd ..
 # We are at ./
