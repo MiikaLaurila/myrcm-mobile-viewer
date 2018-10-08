@@ -14,20 +14,19 @@ class MainPageParser {
 
     DownloadSelectedMainPage() {
 
-        const url = "http://127.0.0.1:6969/" +
-            'http://www.myrcm.ch/myrcm/main?hId[1]=' + this.selectedPageID + '&pLa=en';
+        const url = "http://" + window.location.hostname + ":6969/" +
+           MYRCM_PREFIX + '?hId[1]=' + this.selectedPageID + '&pLa=en&tType=classic';
 
         const that = this;
-        $.ajax({
-            url: url,
-            type: 'GET',
-            crossDomain: true,
-            success: function (data) {
-                const parser = new DOMParser();
-                that.parsedPage = parser.parseFromString(data, "text/html");
-                Events.DispatchEventWithID(EventID.mainPageDownloaded);
-            }
-        });
+        const x = new XMLHttpRequest();
+        x.open('GET', url);
+        x.onload = x.onerror = function () {
+            const parser = new DOMParser();
+            that.parsedPage = parser.parseFromString(x.responseText, "text/html");
+            Events.DispatchEventWithID(EventID.mainPageDownloaded);
+        };
+
+        x.send();
     }
 
     CreatePageSelect() {
@@ -66,69 +65,53 @@ class MainPageParser {
     }
 
     BuildCurrentParsedPage() {
-
-
-        if (this.selectedPageID === "evt") {
-            this.BuildEventPage();
-        }
-
+        this.BuildEventsTable();
     }
 
-    BuildEventPage() {
+    BuildEventsTable() {
         const rootDiv = document.createElement('div');
         rootDiv.id = "rootDiv";
-        rootDiv.appendChild(this.CreateHeader(this.selectedPageHeader));
 
-        const eventTable = document.createElement('table');
+        const eventTable = document.createElement('div');
 
         const eventList = this.ParseEventList();
         for (let i = 0; i < eventList.length; i++) {
 
-            const eventRow = document.createElement('table');
+            const eventRow = document.createElement('div');
 
-            const eventRowHeader = document.createElement('tr');
+            const eventRowHeader = document.createElement('div');
             eventRowHeader.innerHTML = eventList[i].name;
+            eventRowHeader.classList.add('eventRowHeader');
             eventRow.appendChild(eventRowHeader);
 
-            const eventRowButtons = document.createElement('tr');
+            const eventRowHost = document.createElement('div');
+            eventRowHost.innerHTML = eventList[i].host;
+            eventRowHost.classList.add('eventRowHost');
+            eventRow.appendChild(eventRowHost);
 
-            const leftButtonCell = document.createElement('td');
-            const leftButton = document.createElement('button');
-            leftButton.innerHTML = "Results";
-            leftButton.onclick = function (evt) {
-                console.log(eventList[i].onlineReports);
-            };
-            leftButtonCell.appendChild(leftButton);
-            eventRowButtons.appendChild(leftButtonCell);
+            const eventRowDate = document.createElement('div');
+            eventRowDate.innerHTML = eventList[i].from + " - " + eventList[i].to;
+            eventRowDate.classList.add('eventRowDate');
+            eventRow.appendChild(eventRowDate);
 
-            const rightButtonCell = document.createElement('td');
-            const rightButton = document.createElement('button');
-            rightButton.innerHTML = "Streaming";
-            rightButton.onclick = function (evt) {
-                console.log(eventList[i].onlineStreaming);
-            };
-
-            if (eventList[i].onlineStreaming === "N/A") {
-                rightButton.disabled = true;
+            eventRow.classList.add('eventRow');
+            
+            eventRow.onclick = function(){
+                MOBILE_VIEW.selectedEvent = eventList[i];
+                Events.DispatchEventWithID(EventID.showSelectedEventInfo);
+                console.log(MOBILE_VIEW.selectedEvent);
+                
             }
-            rightButtonCell.appendChild(rightButton);
-            eventRowButtons.appendChild(rightButtonCell);
 
-            eventRow.appendChild(eventRowButtons);
             eventTable.appendChild(eventRow);
         }
 
+        eventTable.id = "eventTable";
         rootDiv.appendChild(eventTable);
 
         document.body.appendChild(rootDiv);
     }
 
-    CreateHeader(headerText) {
-        const header = document.createElement('h2');
-        header.classList.add('pageHeader');
-        header.innerHTML = headerText;
-        return header;
-    }
 
     ParseEventList() {
         const dataRows = this.parsedPage.getElementsByClassName('dataList').item(0).children[0].children;

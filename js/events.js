@@ -7,4 +7,5 @@ class Events {
 
 const EventID = {
     "mainPageDownloaded": "mainPageDownloaded",
+    "showSelectedEventInfo": "showSelectedEventInfo"
 }

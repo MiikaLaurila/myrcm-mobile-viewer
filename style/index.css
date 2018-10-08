@@ -1,3 +1,70 @@
 #pageSelect {
-    
+    display: block;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1%;
+    margin-bottom: 3%;
+    font-size: large;
+    text-align: justify;
+    text-align-last: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#eventTable {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: small;
+}
+
+.eventRow{
+    border-bottom: 1px dashed #cccccc;
+    width: 100%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.eventRow:nth-child(odd) {
+    background-color: #eeeeee;
+}
+
+.eventRow:last-of-type {
+    border-bottom: none;
+}
+
+.eventRowHeader {
+    vertical-align: middle;
+    text-align: center;
+    margin-bottom: 1%;
+    width: 95%;
+    height: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.eventRowHost {
+    vertical-align: middle;
+    text-align: center;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 1.5%;
+    font-size: smaller;
+}
+
+.eventRowDate {
+    vertical-align: middle;
+    text-align: center;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: smaller;
 }
