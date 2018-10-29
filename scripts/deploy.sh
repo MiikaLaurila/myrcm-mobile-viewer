@@ -1,12 +1,12 @@
-#!/bin/bashssh
+#!/bin/bash
 
-cd ..
+echo pwd
 # We are at ./
 
 cd js/
 # We are at ./js/
 
-sed -i -e 's/127.0.0.1:6969/cors.myrcm-mobile.tk/g' myrcm-mobile-view.js
+sed -i -e 's/192.168.1.133:6969/cors.myrcm-mobile.tk/g' myrcm-mobile-view.js
 java -jar ../minifiers/closure.jar --js_output_file=myrcm-mobile-min.js '**.js' '!**-min.js' --create_source_map '%outname%.map'
 
 echo "" >> myrcm-mobile-min.js
@@ -37,7 +37,7 @@ cp index.html build/index.html
 
 cd build/
 tar -cf deployment.tar *
-scp -P 10050 deployment.tar web-service@95.216.20.157:/home/web-service/static/
+scp -i ~/.ssh/id_rsa -P 10050 deployment.tar web-service@95.216.20.157:/home/web-service/static/
 ssh -p 10050 web-service@95.216.20.157 'sh untar.sh'
 cd ..
 
@@ -47,7 +47,7 @@ sed -i -e "s/.js?v=$version\"/.js\"/g" index.html
 cd js/
 # We are at ./js/
 
-sed -i -e 's/cors.myrcm-mobile.tk/127.0.0.1:6969/g' myrcm-mobile-view.js
+sed -i -e 's/cors.myrcm-mobile.tk/192.168.1.133:6969/g' myrcm-mobile-view.js
 
 cd ..
 # We are at ./

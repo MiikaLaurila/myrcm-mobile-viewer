@@ -44,8 +44,6 @@ class EventPageParser {
 
     DownloadEventPage() {
         const url = CORS_PREFIX + MYRCM_PREFIX + MOBILE_VIEW.selectedEvent.onlineReports;
-        console.log(url);
-
 
         const that = this;
         const x = new XMLHttpRequest();
@@ -80,8 +78,7 @@ class EventPageParser {
 
             } else if (tdList[i].textContent === "Sections:") {
                 const sections = tdList[i + 1].getElementsByTagName('a');
-                console.log(tdList[i + 1]);
-
+                console.log("deploy test with scp");
 
                 for (let j = 0; j < sections.length; j++) {
                     const sectionButton = document.createElement('div');

@@ -11,6 +11,12 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "Deploy",
+            "type": "shell",
+            "command": "sh scripts/deploy.sh",
+            "problemMatcher": []
         }
     ]
 }
