@@ -1,7 +1,7 @@
 goog.provide('constants');
 
 var MYRCM_PREFIX = "http://www.myrcm.ch/myrcm/main";
-var CORS_PREFIX = "http://192.168.1.69:6969/";
+var CORS_PREFIX = "http://192.168.1.133:6969/";
 // var ONLINE_ENDPOINT = '?pId[E]=0';
 var ONLINE_ENDPOINT = '?pLa=en&pId[E]=0&hId[1]=evt';
 var ARCHIVE_ENDPOINT = '?pLa=en&pId[E]=0&hId[1]=arv';
