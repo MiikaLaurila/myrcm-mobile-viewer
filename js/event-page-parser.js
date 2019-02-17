@@ -19,31 +19,31 @@ class EventPageParser {
         eventInfoContainer.id = "eventInfoContainer";
 
         const eventName = document.createElement('h2');
-        eventName.innerHTML = MOBILE_VIEW.selectedEvent.name;
+        eventName.innerHTML = viewer.selectedEvent.name;
         eventInfoContainer.appendChild(eventName);
 
         const eventHost = document.createElement('p');
-        eventHost.innerHTML = MOBILE_VIEW.selectedEvent.host;
+        eventHost.innerHTML = viewer.selectedEvent.host;
         eventInfoContainer.appendChild(eventHost);
 
         const eventCountry = document.createElement('p');
-        eventCountry.innerHTML = MOBILE_VIEW.selectedEvent.country;
+        eventCountry.innerHTML = viewer.selectedEvent.country;
         eventInfoContainer.appendChild(eventCountry);
 
         const eventDate = document.createElement('p');
-        eventDate.innerHTML = MOBILE_VIEW.selectedEvent.from + " - " + MOBILE_VIEW.selectedEvent.to;
+        eventDate.innerHTML = viewer.selectedEvent.from + " - " + viewer.selectedEvent.to;
         eventInfoContainer.appendChild(eventDate);
 
         rootDiv.appendChild(eventInfoContainer);
         document.body.appendChild(rootDiv);
 
-        MOBILE_VIEW.loadingCircle.ShowLoadingCircle(35);
+        viewer.loadingCircle.ShowLoadingCircle(35);
 
         this.DownloadEventPage();
     }
 
     DownloadEventPage() {
-        const url = CORS_PREFIX + MYRCM_PREFIX + MOBILE_VIEW.selectedEvent.onlineReports;
+        const url = CORS_PREFIX + MYRCM_PREFIX + viewer.selectedEvent.onlineReports;
 
         const that = this;
         const x = new XMLHttpRequest();

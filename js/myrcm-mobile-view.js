@@ -1,17 +1,25 @@
-class MobileView{
-    constructor()
-    {
-        /** @type {RCEventData} */
-        this.selectedEvent = null;
+goog.require('constants');
+goog.require('ui');
+goog.require('networking');
 
-        this.loadingCircle = new LoadingCircle();
-        this.mainPageParser = new MainPageParser();
-        this.eventPageParser = new EventPageParser();
+class Viewer {
+    constructor() {
+        // /** @type {RCEventData} */
+        // this.selectedEvent = null;
+        this.ui = new UIHandler();
+        this.networking = new NetworkClient();
+        //this.mainPageParser = new MainPageParser();
+        //this.eventPageParser = new EventPageParser();
+
+        this.ui.loadingCircle.showLoadingCircle();
+        this.networking.doAjaxCall('?pId[E]=0');
     }
 }
 
-var MYRCM_PREFIX = "http://www.myrcm.ch/myrcm/main";
-var CORS_PREFIX = "http://192.168.1.133:6969/";
+/** @type {Viewer} */
+var viewer = new Viewer();
 
-/** @type {MobileView} */
-var MOBILE_VIEW = new MobileView();
+function doAjaxCall(endpoint){
+    viewer.ui.loadingCircle.showLoadingCircle();
+    viewer.networking.doAjaxCall(endpoint);
+}

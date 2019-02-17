@@ -6,7 +6,7 @@ echo pwd
 cd js/
 # We are at ./js/
 
-sed -i -e 's/192.168.1.133:6969/cors.myrcm-mobile.tk/g' myrcm-mobile-view.js
+sed -i -e 's/192.168.1.69:6969/cors.myrcm-mobile.tk/g' myrcm-mobile-view.js
 java -jar ../minifiers/closure.jar --js_output_file=myrcm-mobile-min.js '**.js' '!**-min.js' --create_source_map '%outname%.map'
 
 echo "" >> myrcm-mobile-min.js

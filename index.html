@@ -8,11 +8,28 @@
     <meta http-equiv="cache-control" content="no-cache" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <script src="./js/external/jquery-3.3.1-min.js"></script>
+
     <link rel="stylesheet" href="./style/styles.css">
 
 </head>
 
 <body>
+    <table id="headerBar">
+        <tr>
+            <td class="headerBarButton selected" onclick="viewer.ui.selectOnlineEvents(this)">Online events</td>
+            <td class="headerBarButton" onclick="viewer.ui.selectArchiveEvents(this)">Archive events</td>
+        </tr>
+    </table>
+
+    <select id="countrySelect">
+        <option disabled selected>Country filter</option>
+        <option value="all">All</option>
+    </select>
+
+    <div id="eventListWrapper">
+        <div id="eventListContainer"></div>
+    </div>
 </body>
 
 <script src="./js/myrcm-mobile-min.js"></script>
