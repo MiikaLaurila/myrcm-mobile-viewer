@@ -1,10 +1,12 @@
 goog.provide('constants');
 
-var MYRCM_PREFIX = "http://www.myrcm.ch/myrcm/main";
-var CORS_PREFIX = "http://192.168.1.133:6969/";
-// var ONLINE_ENDPOINT = '?pId[E]=0';
+var MAIN_PREFIX = "http://www.myrcm.ch/myrcm/main";
+var REPORT_PREFIX = "http://www.myrcm.ch/myrcm/report/en/";
+var CORS_PREFIX = "http://192.168.1.69:6969/";
 var ONLINE_ENDPOINT = '?pLa=en&pId[E]=0&hId[1]=evt';
 var ARCHIVE_ENDPOINT = '?pLa=en&pId[E]=0&hId[1]=arv';
+var SEARCH = window.location.search.substring(1);
+var QS = parse_query_string(SEARCH);
 var COUNTRIES = [
     { id: '31', label: "Argentina" },
     { id: '34', label: "Australia" },

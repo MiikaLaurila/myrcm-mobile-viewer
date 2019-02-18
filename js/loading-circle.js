@@ -1,8 +1,6 @@
 class LoadingCircle{
     constructor()
     {
-        window.addEventListener(EventID.showLoadingCircle, this.showLoadingCircle.bind(this));
-        window.addEventListener(EventID.hideLoadingCircle, this.hideLoadingCircle.bind(this));
 
         this.loadingOverlay = document.createElement('div');
         this.loadingOverlay.id = "loadingOverlay";
