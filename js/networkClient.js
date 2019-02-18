@@ -7,36 +7,38 @@ class NetworkClient {
 
     doAjaxCall(endpoint, country) {
 
-        let filter = "";
+        let postOptions = '&tType=classic&cType=json&ajax=true';
         if (country) {
-            filter = '[{"field":{"label":"Country","value":"Country"},"operator":{"label":"equals","value":"eq"},"value":{"label":"\\"' + country.label + '\\"","value":"' + country.id + '"}}]';
+            const filter = '[{"field":{"label":"Country","value":"Country"},"operator":{"label":"equals","value":"eq"},"value":{"label":"\\"' + country.label + '\\"","value":"' + country.id + '"}}]';
+            postOptions = postOptions + '&filter=' + filter;
         }
 
         const x = new XMLHttpRequest();
 
-        x.open('POST', CORS_PREFIX + MYRCM_PREFIX + endpoint, true);
-        x.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        x.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        x.open('GET', CORS_PREFIX + MYRCM_PREFIX + endpoint + postOptions, true);
 
-        x.onload = (evt) => {
-            console.log(x.response);
-            viewer.ui.loadingCircle.hideLoadingCircle();
-            
-            const resultData = JSON.parse(x.response);
-            console.log(resultData);
+        x.onreadystatechange = (evt) => {
+            if (x.readyState === 4 && x.status === 200) {
+                const resultData = JSON.parse(x.response);
+                console.log(resultData);
+                viewer.ui.loadingCircle.hideLoadingCircle();
 
-            if (resultData.DATA) {
-                document.getElementById('eventListContainer').innerHTML = resultData.DATA;
-            } else {
-                document.getElementById('eventListContainer').innerHTML = resultData;
+                if (resultData.DATA) {
+                    document.getElementById('eventListContainer').innerHTML = resultData.DATA;
+                } else {
+                    document.getElementById('eventListContainer').innerHTML = resultData;
+                }
+            }
+            else if(x.readyState === 4){
+                console.error('MYRCM data fetch failed');
             }
         };
 
-        if (filter.length > 0) {
-            x.send('cType=json&ajax=true&filter=' + filter);
-        } else {
-            x.send('cType=json&ajax=true');
+        x.onerror = (err) => {
+            console.error(err);
         }
+
+        x.send();
 
 
 
